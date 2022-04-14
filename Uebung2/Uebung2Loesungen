@@ -1,0 +1,198 @@
+#include <stdio.h>
+#include <stdbool.h>
+#include <stdlib.h>
+#include <limits.h> 
+#include <ctype.h>
+
+int aufgabeA();
+void aufgabeB();
+void aufgabeC();
+int aufgabeD(int a, int b);
+
+//Main Methode
+
+int main(void) {
+
+    //int erg = aufgabeA();
+    //printf("Min = %d\n", erg);
+    //aufgabeB();
+    //aufgabeC();
+    int res = aufgabeD(17, 5);
+    printf("%d\n", res);
+    return 0;
+}
+
+//----------------------------------------
+int aufgabeA() {
+    int j = 0;
+    int num;
+    int tmp;
+    int min = 0;
+    while(j < 10) {
+        printf("Enter positive Integer : \n");
+        scanf("%d", &num);
+        //printf("%d\n", j);
+        //printf("%d\n", min);
+
+        if(j == 0) {
+            //assign num to min; 
+            min = num;
+            j++;
+            continue;
+            
+        } else {
+        if(num < 1) {
+            j++;
+            continue;
+            
+        }
+        if(num < min ) {
+            min = num;
+        }
+        j++;
+    }
+    }
+
+    return min;
+    
+}
+
+//------------------------------------------
+
+void aufgabeB() {
+    int num, max = 0;
+
+    FILE *fp = fopen("wert.txt", "a+");
+
+    if(fp == NULL) {
+        printf("Error. File not found!!");
+        exit(1);
+    }
+
+    //print text in file
+
+    int i = 0;
+    while(i < 6) {
+        printf("Enter num : ");
+        scanf("%d", &num);
+        fprintf(fp,"%d\n", num);
+        //putw(num, fp);
+        i++;
+    }
+
+    fclose(fp);
+
+
+
+
+    FILE *fp2 = fopen("wert.txt", "r");
+
+   
+    int a; 
+    while(!feof(fp2)) {
+        //a = getw(fp2);
+        fscanf(fp2,"%d",&a);
+        printf(" a : %d\n", a);
+
+        if(a > max) {
+            max = a;
+    
+        }
+
+         //printf("max : %d\n", max);
+
+    }
+
+    fclose(fp2);
+
+
+    FILE *fergeb = fopen("ergebnis.txt", "a+");
+
+fprintf(fergeb, "%d\n", max);
+    //putw(max, fergeb);
+
+    fclose(fergeb);
+
+    printf("Max no : %d \n", max);
+
+}
+
+//--------------------------------------------
+
+void aufgabeC() {
+    FILE *fp;
+    char txt;
+    int zahl = 0;
+    int a = 0, e = 0, i = 0, o = 0, u = 0;
+    fp = fopen("test.txt", "r");
+    while(!feof(fp)) {
+    fscanf(fp, "%c", &txt);
+    txt = tolower(txt);
+    if(txt != ' ' && txt != '.' && txt != ',') {
+    
+        if(txt == 'a' || txt == 'e' || txt == 'i' || txt == 'o' || txt == 'u') {
+            
+            switch(txt) {
+                case 'a' :
+                a++;
+                zahl++;
+                continue;
+
+                case 'e' :
+                e++;
+                zahl++;
+                continue;
+
+                case 'i' :
+                i++;
+                zahl++;
+                continue;
+
+                case 'o' :
+                o++;
+                zahl++;
+                continue;
+
+                case 'u' :
+                u++;
+                zahl++;
+                continue;
+                
+
+    }
+        }
+    
+       printf("%c", txt);
+        zahl++;
+    
+   }
+
+    }
+
+    fclose(fp);
+    printf("Anzahl Zeichen : \n%d\n", zahl);
+    printf("Anzahl a : %d\n", a);
+    printf("Anzahl e : %d\n", e);
+    printf("Anzahl i : %d\n", i);
+    printf("Anzahl o : %d\n", o);
+    printf("Anzahl u : %d\n", u);
+}
+
+//----------------------------------------------------
+
+int aufgabeD(int a, int b) {
+    int result = 0;
+
+    // TODO; zuerst a und b noch einlesen:
+    
+    
+    // Dies soll Integer-Division a / b umsetzen:
+    //while (a - b > 0) { (Fehler!!!)
+    while (a - b >= 0) {
+        result++;
+        a = a - b;
+    }
+    
+    return result;
+}
+
